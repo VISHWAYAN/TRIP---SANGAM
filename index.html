@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Guide India</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Switch styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(14px);
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        header.dark-mode {
+            background-color: #1f1f1f;
+        }
+
+        nav ul li a.dark-mode {
+            color: #e0e0e0;
+        }
+
+        /* Category icons */
+        .category {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .category-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        /* Icon colors */
+        .religious-icon {
+            color: #eadddb;
+        }
+
+        .heritage-icon {
+            color: #ce8922;
+        }
+
+        .nature-icon {
+            color: #66bb6a;
+        }
+
+        .parks-icon {
+            color: #42a5f5;
+        }
+
+        /* Offbeat Icon */
+        .offbeat-icon {
+            color: #f5a623;
+        }
+
+        /* Hide sections by default */
+        .place-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .place {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .place img {
+            width: 100px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        
+                    
+                
+                <!-- Sign In Form Section -->
+                <style>
+                    /* Switch styles */
+                    .switch {
+                        position: relative;
+                        display: inline-block;
+                        width: 34px;
+                        height: 20px;
+                    }
+            
+                    .switch input {
+                        opacity: 0;
+                        width: 0;
+                        height: 0;
+                    }
+            
+                    .slider {
+                        position: absolute;
+                        cursor: pointer;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: #ccc;
+                        transition: .4s;
+                        border-radius: 20px;
+                    }
+            
+                    .slider:before {
+                        position: absolute;
+                        content: "";
+                        height: 12px;
+                        width: 12px;
+                        border-radius: 50%;
+                        left: 4px;
+                        bottom: 4px;
+                        background-color: white;
+                        transition: .4s;
+                    }
+            
+                    input:checked+.slider {
+                        background-color: #2196F3;
+                    }
+            
+                    input:checked+.slider:before {
+                        transform: translateX(14px);
+                    }
+            
+                    /* Dark mode styles */
+                    body.dark-mode {
+                        background-color: #121212;
+                        color: #e0e0e0;
+                    }
+            
+                    header.dark-mode {
+                        background-color: #1f1f1f;
+                    }
+            
+                    nav ul li a.dark-mode {
+                        color: #e0e0e0;
+                    }
+            
+                    /* Form error message */
+                    .error {
+                        color: red;
+                        margin-top: 10px;
+                    }
+                </style>
+            </head>
+            
+            <body>
+                <header>
+                    <div class="logo">
+                        <img src="TRIPSANGAM.png" alt="TripSangam" width="100">
+                        <h1>TRIPSANGAM</h1>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#safar-buddy">Safar Buddy</a></li>
+                            <li><a href="#places">Places in India</a></li>
+                            <li><a href="#offbeat-places">Offbeat Places</a></li>
+                            <li><a href="#transport-fares">Transport Fares</a></li>
+                            <li><a href="#Sign In">Sign In</a></li>
+                            <li>
+                                <label class="switch">
+                                    <input type="checkbox" id="toggleDarkMode">
+                                    <span class="slider"></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+            
+                <!-- Sign In Form Section -->
+                <div id="sign-in-form" class="form-popup" style="display: block;">
+                    <form id="signInForm" class="form-container" onsubmit="return validateForm()">
+                        <h2>Sign In</h2>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" placeholder="Enter your username">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" placeholder="Enter your password">
+                        <button type="submit" class="btn">Sign In</button>
+                        <!-- Registration Button -->
+<a href="register.html" class="btn-register">Register</a>
+
+                        
+                        <p id="error-message" class="error" style="display:none;">Invalid username or password!</p>
+                    </form>
+                </div>
+            
+                <script>
+                    // Function to validate the sign-in form
+                    function validateForm() {
+                        const username = document.getElementById('username').value;
+                        const password = document.getElementById('password').value;
+                        const errorMessage = document.getElementById('error-message');
+            
+                        // Check if the correct username and password are entered
+                        if (username === "Tripsangam" && password === "1234") {
+                            closeForm(); // Close the form if credentials are correct
+                            return false; // Prevent form from submitting
+                        } else {
+                            errorMessage.style.display = 'block'; // Show error message for invalid credentials
+                            return false; // Prevent form submission
+                        }
+                    }
+            
+                    // Function to close the sign-in form
+                    function closeForm() {
+                        document.getElementById("sign-in-form").style.display = "none";
+                    }
+                </script>
+                
+    </header>
+
+    <section id="safar-buddy">
+        <img src="SAFAR BUDDY.jpg" alt="safarbuddy" width="60">
+        <h2>Safar Buddy</h2>
+        <h3>Select your own guide with a nominal fee. Explore India with local experts.</h3>
+
+        <!-- Input field for user to enter location -->
+        <input type="text" id="locationInput" placeholder="Enter the name of the place you want to visit">
+        <button onclick="toggleSafarBuddy()">Find a Guide</button>
+
+        <!-- Available Guides Section -->
+        <div id="guide-profiles" class="hidden">
+            <h3>Available Guides</h3>
+
+            <!-- Specific Guide for Victoria Memorial -->
+            <div class="profile" id="victoriaGuide" style="display: none;">
+                <img src="ANURAG GHOSH.png" alt="Guide" height="100">
+                <div class="profile-info">
+                    <h4>ANURAG GHOSH</h4>
+                    <p>Rating: ★★★★☆ (4/5)</p>
+                    <p>Age: 34</p>
+                    <p>Language: English, Bengali, Hindi</p>
+                    <p>Specialty: Expert guide for Victoria Memorial</p>
+                    <button>Book Guide</button>
+                </div>
+            </div>
+
+            <!-- Generic Guides -->
+            <div class="profile">
+                <img src="ROUNAK SINGH.jpg" alt="Guide 2">
+                <div class="profile-info">
+                    <h4>ROUNAK SINGH</h4>
+                    <p>Rating: ★★★☆☆ (3/5)</p>
+                    <p>Age: 37</p>
+                    <p>Language: Hindi</p>
+                    <button>Book Guide</button>
+                </div>
+            </div>
+            <div class="profile">
+                <img src="RAMESH SINGH.jpg" alt="Guide 1" width="100" height="90">
+                <div class="profile-info">
+                    <h4>RAMESH SINGH</h4>
+                    <p>Rating: ★★★★☆ (4/5)</p>
+                    <p>Age: 41</p>
+                    <p>Language: Hindi, English</p>
+                    <button>Book Guide</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Places of Interest Section -->
+    <section id="places">
+        <h2>Places of Interest in India</h2>
+
+        <!-- New Location Search within Places -->
+        <input type="text" id="locationPlacesInput" placeholder="Enter the location to explore">
+        <button style="background-color: #fa9f0e;" onclick="searchPlacesByLocation()">Search by Location</button>
+
+        <div class="category">
+            <!-- 1st Category: Religious and Culture -->
+            <div class="category-item" onclick="showSection('religious-places')">
+                <span class="category-icon religious-icon">&#128248;</span> <!-- Religious Icon -->
+                <h3>Religious and Culture</h3>
+            </div>
+
+            <!-- 2nd Category: Heritage Art and Architecture -->
+            <div class="category-item" onclick="showSection('heritage-places')">
+                <span class="category-icon heritage-icon">&#127963;</span> <!-- Heritage Icon -->
+                <h3>Heritage Art and Architecture</h3>
+            </div>
+
+            <!-- 3rd Category: Nature and Landscape -->
+            <div class="category-item" onclick="showSection('nature-places')">
+                <span class="category-icon nature-icon">&#127793;</span> <!-- Nature Icon -->
+                <h3>Nature and Landscape</h3>
+            </div>
+
+            <!-- 4th Category: National Parks and Sanctuaries -->
+            <div class="category-item" onclick="showSection('parks-places')">
+                <span class="category-icon parks-icon">&#128960;</span> <!-- Parks Icon -->
+                <h3>National Parks and Sanctuaries</h3>
+            </div>
+        </div>
+
+        <!-- Religious and Cultural Places Section -->
+        <div id="religious-places" class="place-section">
+            <h3>Religious and Cultural Places in India</h3>
+            <div class="place" data-location="Kolkata">
+                <img src="https://www.shutterstock.com/image-photo/bathing-kalighat-kali-temple-kolkata-260nw-1878279571.jpg" alt="KALIGHAT MANDIR">
+                <p>KALIGHAT MANDIR, KOLKATA</p>
+                <button><a href="https://www.google.com/maps/dir//kalighat+temple+google+maps">Location</a></button>
+            </div>
+            <div class="place" data-location="Kolkata">
+                <img src="https://www.shutterstock.com/image-photo/kolkata-dakshineswar-temple-amazing-image-600nw-1267544638.jpg" alt="DAKSHINESHWAR MANDIR">
+                <p>DAKSHINESHWAR MANDIR, KOLKATA</p>
+                <button><a href="https://www.google.com/maps/dir//Dakshineswar+Kali+Temple,+Dakshineswar,+Kolkata,+West+Bengal+700076">Location</a></button>
+            </div>
+            <div class="place" data-location="Mayapur">
+                <img src="https://www.shutterstock.com/image-photo/newly-made-hindu-temple-international-260nw-1538354621.jpg" alt="ISCKON TEMPLE">
+                <p>ISCKON TEMPLE, MAYAPUR</p>
+                <button><a href="https://www.google.com/maps/dir//Mayapur+Iskcon+temple">Location</a></button>
+            </div>
+        </div>
+
+        <!-- Heritage Art and Architecture Places Section -->
+        <div id="heritage-places" class="place-section">
+            <h3>Heritage Art and Architecture Places in India</h3>
+            <div class="place" data-location="Kolkata">
+                <img src="https://www.shutterstock.com/image-photo/victoria-memorial-kolkata-whole-building-600w-2465451193.jpg" alt="Victoria Memorial">
+                <p>Victoria Memorial, Kolkata</p>
+                <button><a href="https://www.google.com/maps/dir//victoria+memorial">Location</a></button>
+            </div>
+            <div class="place" data-location="Hyderabad">
+                <img src="https://t4.ftcdn.net/jpg/07/61/28/69/360_F_761286962_zztjGVRU1a4xBeSrw3eTHJ74uVbJnoQj.jpg" alt="CHARMINAR">
+                <p>Charminar, Hyderabad</p>
+                <button><a href="https://www.google.com/maps/dir//charminar">Location</a></button>
+            </div>
+        </div>
+
+        <!-- Nature and Landscape Places Section -->
+        <div id="nature-places" class="place-section">
+            <h3>Nature and Landscape Places in India</h3>
+            <div class="place" data-location="Darjeeling">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkMtbP_h6O04NEsgWI1qqbpDUt0doK7nurng&s" alt="Himalayan Railways">
+                <p>Himalayan Railways, Darjeeling</p>
+                <button><a href="https://www.google.com/maps/dir//Himalayan+Railways,+Darjeeling">Location</a></button>
+            </div>
+            <div class="place" data-location="Shimla">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQMEOIfLqFkADObl9wH6zfgwh68q5_7IO1aQ&s" alt="Shimla Toy Train">
+                <p>Shimla Toy Train, Shimla</p>
+                <button><a href="https://www.google.com/maps/dir//Shimla+Toy+Train,+Shimla">Location</a></button>
+            </div>
+        </div>
+
+        <!-- National Parks and Sanctuaries Section -->
+        <div id="parks-places" class="place-section">
+            <h3>National Parks and Sanctuaries in India</h3>
+            <div class="place" data-location="Kolkata">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkFxSH5zkc6dujt-H8NkHPCpKxc3XXPPu-gw&s" alt="Kolkata Zoological Garden">
+                <p>Kolkata Zoological Garden, Kolkata</p>
+                <button><a href="https://www.google.com/maps/dir//kolkata+zoological+garden">Location</a></button>
+            </div>
+            <div class="place" data-location="Odisha">
+                <img src="https://img.freepik.com/premium-photo/ai-generated-ai-generative-photo-zoo-landscape_427757-1437.jpg" alt="Nandankanan Zoo">
+                <p>Nandankanan Zoo, Odisha</p>
+                <button><a href="https://www.google.com/maps/dir//nandankanan+zoo">Location</a></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offbeat Places Section -->
+    <section id="offbeat-places">
+        <h2>Offbeat Places of India</h2>
+
+        <!-- New Location Search within Offbeat Places -->
+        <input type="text" id="locationOffbeatInput" placeholder="Enter the location to explore">
+        <button style="background-color: #f5a623;" onclick="searchOffbeatPlacesByLocation()">Search by Location</button>
+
+        <div class="category">
+            <!-- Offbeat Place Category -->
+            <div class="category-item" onclick="showSection('offbeat-places-section')">
+                <span class="category-icon offbeat-icon">&#128747;</span> <!-- Offbeat Icon -->
+                <h3>Offbeat Places</h3>
+            </div>
+        </div>
+
+        <!-- Offbeat Places Section -->
+        <div id="offbeat-places-section" class="place-section">
+            <h3>Offbeat Places in India</h3>
+            <div class="place" data-location="Kolkata">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSadjUE-gOFxFF4YXsbFID7AfaUJQTEQanecA&s" alt="Kapal Kundala Mandir">
+                <p>Kapal Kundala Mandir, Kolkata</p>
+                <button><a href="https://www.google.com/maps/dir//Kapal+Kundala+Mandir,+Kolkata">Location</a></button>
+            </div>
+            <div class="place" data-location="Kalna">
+                <img src="https://www.newsbharati.com/Encyc/2022/4/11/Kalna_202204111640527835_H@@IGHT_0_W@@IDTH_600.jpg" alt="Kalna 108 Mandir">
+                <p>Kalna 108 Mandir, Kalna</p>
+                <button><a href="https://www.google.com/maps/dir//Kalna+108+Mandir,+Kalna">Location</a></button>
+            </div>
+            <div class="place" data-location="Sundarbon">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppeZbKiN4jyvLAltQhhj1ckidFcfzrx3kzaqWTSm2iG4p3uif9jBdXkM_YylliOXxznw&usqp=CAU" alt="Sundarbon">
+                <p>Sundarbon</p>
+                <button><a href="https://www.google.com/maps/dir//Sundarbon">Location</a></button>
+            </div>
+            <div class="place" data-location="Shantipur">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD_HGah0JwpjczsxgA2B0_fjb_QvRHBnIKjQ&s" alt="Shantipur">
+                <p>Shantipur</p>
+                <button><a href="https://www.google.com/maps/dir//Shantipur">Location</a></button>
+            </div>
+            <div class="place" data-location="Kanakpur">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEW6cBVvtgJDf92ACoPZ7F0Vrl6Uy0ZF_LqA&s" alt="Kanakpur">
+                <p>Kanakpur</p>
+                <button><a href="https://www.google.com/maps/dir//Kanakpur">Location</a></button>
+            </div>
+            <div class="place" data-location="Bishnupur">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLyOiYEsIMBsHlJH1g9jD80jFJsa1mKkBKdg&s" alt="Bishnupur Temples">
+                <p>Bishnupur Temples, West Bengal</p>
+                <button><a href="https://www.google.com/maps/dir//Bishnupur+Temples,+West+Bengal">Location</a></button>
+            </div>
+            <div class="place" data-location="Murshidabad">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjP0kJ6nr9JOxgHWDzWyQXJlzF4FrHJeGWdA&s" alt="Hazarduari Palace">
+                <p>Hazarduari Palace, Murshidabad</p>
+                <button><a href="https://www.google.com/maps/dir//Hazarduari+Palace,+Murshidabad">Location</a></button>
+            </div>
+        </div>
+   
+<!-- New Transport Fares Section -->
+<div class="container">
+    <h1>Transport Fare Finder</h1>
+
+    <div class="form-group">
+      <label for="current-location">Current Location</label>
+      <input type="text" id="current-location" placeholder="Enter your current location">
+    </div>
+
+    <div class="form-group">
+      <label for="drop-location">Drop Location</label>
+      <input type="text" id="drop-location" placeholder="Enter your drop location">
+    </div>
+
+    <div class="form-group">
+      <input type="button" value="Find Fares" onclick="findFares()">
+    </div>
+
+    <div class="fares" id="fares" style="display: none;">
+      <h3>Available Fares</h3>
+      <ul id="fare-list">
+        <!-- Fares will be displayed here -->
+      </ul>
+    </div>
+
+    <div class="transport-buttons">
+      <a href="https://www.olacabs.com" target="_blank" class="ola">
+        <img src="https://iconape.com/wp-content/png_logo_vector/ola-cabs.png" alt="Ola Icon"> Ola
+      </a>
+      <a href="https://www.uber.com" target="_blank" class="uber">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHjUb-erX5J8t-bQ5C_reaUNPuUrv8_pygAQ&s" alt="Uber Icon"> Uber
+      </a>
+      <a href="https://www.rapido.bike" target="_blank" class="rapido">
+        <img src="https://upload.wikimedia.org/wikipedia/en/e/e7/Rapido-logo.png" alt="Rapido Icon"> Rapido
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function findFares() {
+      const currentLocation = document.getElementById('current-location').value.toLowerCase();
+      const dropLocation = document.getElementById('drop-location').value.toLowerCase();
+      const fares = document.getElementById('fares');
+      const fareList = document.getElementById('fare-list');
+  
+      // Clear any previous fares
+      fareList.innerHTML = '';
+  
+      // Check for specific routes and display corresponding fares
+      if (currentLocation === 'maheshtala' && dropLocation === 'budge budge') {
+        fares.style.display = 'block';
+        fareList.innerHTML = `
+          <li>Auto: ₹35</li>
+          <li>Bus: ₹25</li>
+          <li>Train: ₹10</li>
+        `;
+      } else if (currentLocation === 'howrah' && dropLocation === 'kalighat') {
+        fares.style.display = 'block';
+        fareList.innerHTML = `
+          <li>Taxi: ₹250</li>
+          <li>Bus: ₹40</li>
+          <li>Metro: ₹20</li>
+        `;
+      } else if (currentLocation === 'howrah' && dropLocation === 'kapalkundala mandir') {
+        fares.style.display = 'block';
+        fareList.innerHTML = `
+          <li>Taxi: ₹400</li> 
+          <li>Bus: ₹150</li>
+        `;
+      } else if (currentLocation === 'kolkata' && dropLocation === 'kalna 108 mandir') {
+        fares.style.display = 'block';
+        fareList.innerHTML = `
+          <li>Taxi: ₹800</li>
+          <li>Bus: ₹200</li>
+          <li>Train: ₹60</li>
+        `;
+      } else {
+        fares.style.display = 'none';
+        alert('No fare information available for the entered locations.');
+      }
+    }
+  </script>
+  
+
+<script>
+// Mock data for available fares based on location
+const fareData = {
+    "kolkata": {
+        ola: "₹200 - ₹500",
+        uber: "₹180 - ₹450",
+        rapido: "₹100 - ₹300"
+    },
+    "mumbai": {
+        ola: "₹300 - ₹600",
+        uber: "₹250 - ₹550",
+        rapido: "₹150 - ₹400"
+    },
+    "delhi": {
+        taxi: "₹250 - ₹550",
+        uber: "₹230 - ₹500",
+        rapido: "₹120 - ₹350"
+    }
+};
+
+function findTransport() {
+    var location = document.getElementById('locationInputTransport').value.toLowerCase();
+    var transportOptions = document.getElementById('transport-options');
+    var fareInfo = document.getElementById('fare-info');
+    var locationDisplay = document.getElementById('locationDisplay');
+
+    // Check if the location exists in the fare data
+    if (fareData[location]) {
+        transportOptions.style.display = 'block'; // Show the transport options section
+        locationDisplay.textContent = location.charAt(0).toUpperCase() + location.slice(1); // Display entered location
+        
+        // Update fare info dynamically
+        fareInfo.innerHTML = `
+            <p>Ola: Estimated fare: ${fareData[location].ola}</p>
+            <p>Uber: Estimated fare: ${fareData[location].uber}</p>
+            <p>Rapido: Estimated fare: ${fareData[location].rapido}</p>
+        `;
+    } else {
+        transportOptions.style.display = 'none'; // Hide transport options if location is invalid
+        alert('Transport fares are not available for this location. Please enter a valid location like Kolkata, Mumbai, or Delhi.');
+    }
+}
+</script>
+
+    
+
+    <script src="script.js"></script>
+    <iframe
+    src="https://www.chatbase.co/chatbot-iframe/GJQ9gFC25U-M0joxhZ-TB"
+    width="100%"
+    style="height: 100%; min-height: 700px"
+    frameborder="0"
+    ></iframe>
+    <script>
+        window.embeddedChatbotConfig = {
+        chatbotId: "GJQ9gFC25U-M0joxhZ-TB",
+        domain: "www.chatbase.co"
+        }
+        </script>
+        <script
+        src="https://www.chatbase.co/embed.min.js"
+        chatbotId="GJQ9gFC25U-M0joxhZ-TB"
+        domain="www.chatbase.co"
+        defer>
+        </script>
+
+
+
+
+</body>
+
+</html>
